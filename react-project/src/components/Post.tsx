@@ -1,10 +1,13 @@
-function Post() {
-  return (
-    <div>
-        <p>Maximilian</p>
-        <p>React.js is awesome!</p>
-    </div>
-  )
+interface PostProps {  // 命名使用 ComponentName + Props 的慣例
+  name: string;
 }
 
-export default Post
+function Post(props: PostProps) {
+  return (
+    <div>
+      <p>React.js is awesome! {props.name}</p>
+    </div>
+  );
+}
+
+export default Post;
