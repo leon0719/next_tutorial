@@ -1,17 +1,9 @@
-import Post from "./components/Post";
+import PostList from "./components/PostList";
 
 function App() {
   return (
     <main>
-      <Post name="John" />
-      <Post name="Jane" />
-      <Post name="Jack" />
-      <Post name="Jill" />
-      <Post name="Joe" />
-      <Post name="Josh" />
-      <Post name="Judy" />
-      <Post name="Julia" />
-      <Post name="Jim" />
+      <PostList />
     </main>
   );
 }
