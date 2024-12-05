@@ -7,6 +7,11 @@ import Modal from "./Modal";
 function PostList() {
   const [enteredBody, setEnteredBody] = useState("");
   const [enteredAuthor, setEnteredAuthor] = useState("");
+  const [modalIsVisible, setModalIsVisible] = useState(true);
+
+  function hideModalHandler() {
+    setModalIsVisible(false);
+  }
 
   function changeBodyHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setEnteredBody(event.target.value);
@@ -18,12 +23,14 @@ function PostList() {
 
   return (
     <>
-      <Modal>
-        <NewPost
-          onBodyChange={changeBodyHandler}
-          onAuthorChange={authorChangeHandler}
-        />
-      </Modal>
+      {modalIsVisible && (
+        <Modal onClose={hideModalHandler}>
+          <NewPost
+            onBodyChange={changeBodyHandler}
+            onAuthorChange={authorChangeHandler}
+          />
+        </Modal>
+      )}
       <ul className={classes.post}>
         <Post name={enteredAuthor} body={enteredBody} />
         <Post name="John" body="Hello, world!" />

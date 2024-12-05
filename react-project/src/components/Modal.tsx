@@ -3,12 +3,13 @@ import classes from "./Modal.module.css";
 
 interface ModalProps {
   children: ReactNode;
+  onClose: () => void;
 }
 
-function Modal({ children }: ModalProps) {
+function Modal({ children, onClose }: ModalProps) {
   return (
     <>
-      <div className={classes.backdrop} />
+      <div className={classes.backdrop} onClick={onClose} />
       <dialog open={true} className={classes.modal}>
         {children}
       </dialog>
