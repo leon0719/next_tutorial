@@ -1,43 +1,37 @@
-import { useState } from "react";
 import NewPost from "./NewPost";
 import Post from "./Post";
 import classes from "./PostList.module.css";
 import Modal from "./Modal";
+import { useState } from "react";
 
 interface PostListProps {
   isPosting: boolean;
   onStopPosting: () => void;
 }
 
+function PostList({ isPosting, onStopPosting }: PostListProps) {
+  const [posts, setPosts] = useState<{ body: string; author: string }[]>([]);
 
-function PostList({isPosting, onStopPosting}: PostListProps) {
-  const [enteredBody, setEnteredBody] = useState("");
-  const [enteredAuthor, setEnteredAuthor] = useState("");
-
-
-
-
-  function changeBodyHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    setEnteredBody(event.target.value);
+  function addPostHandler(postData: { body: string; author: string }) {
+    setPosts((existPosts) => [...existPosts, postData]);
   }
-
-  function authorChangeHandler(event: React.ChangeEvent<HTMLInputElement>) {
-    setEnteredAuthor(event.target.value);
-  }
-
   return (
     <>
       {isPosting && (
         <Modal onClose={onStopPosting}>
-          <NewPost
-            onBodyChange={changeBodyHandler}
-            onAuthorChange={authorChangeHandler}
-          />
+          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
         </Modal>
       )}
+      {posts.length === 0 && (
+        <div style={{ textAlign: "center", color: "white" }}>
+          <h2>No posts yet</h2>
+          <p>Start adding some!</p>
+        </div>
+      )}
       <ul className={classes.post}>
-        <Post name={enteredAuthor} body={enteredBody} />
-        <Post name="John" body="Hello, world!" />
+        {posts.map((post) => (
+          <Post key={post.author} name={post.author} body={post.body} />
+        ))}
       </ul>
     </>
   );
