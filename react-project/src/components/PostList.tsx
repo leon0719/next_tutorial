@@ -4,14 +4,18 @@ import Post from "./Post";
 import classes from "./PostList.module.css";
 import Modal from "./Modal";
 
-function PostList() {
+interface PostListProps {
+  isPosting: boolean;
+  onStopPosting: () => void;
+}
+
+
+function PostList({isPosting, onStopPosting}: PostListProps) {
   const [enteredBody, setEnteredBody] = useState("");
   const [enteredAuthor, setEnteredAuthor] = useState("");
-  const [modalIsVisible, setModalIsVisible] = useState(true);
 
-  function hideModalHandler() {
-    setModalIsVisible(false);
-  }
+
+
 
   function changeBodyHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     setEnteredBody(event.target.value);
@@ -23,8 +27,8 @@ function PostList() {
 
   return (
     <>
-      {modalIsVisible && (
-        <Modal onClose={hideModalHandler}>
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
           <NewPost
             onBodyChange={changeBodyHandler}
             onAuthorChange={authorChangeHandler}
