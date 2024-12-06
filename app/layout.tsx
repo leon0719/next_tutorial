@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Roboto } from "next/font/google";
-import MainHeader from "@/components/main-header";
+import MainHeader from "@/components/main-header/main-header";
 
 export const metadata = {
   title: "NextLevel Food",
