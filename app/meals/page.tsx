@@ -1,12 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import classes from "./page.module.css";
 import Link from "next/link";
 import MealsGrid, { mealsProps } from "@/components/meals/meals-grid";
 import { getMeals } from "@/lib/meals";
 
+async function Meals() {
+  const meals = (await getMeals()) as mealsProps["meals"];
+
+  return <MealsGrid meals={meals} />;
+}
+
 // 通常不會在react component 加入async 但 next.js server component可以
 async function MealsPage() {
-  const meals = (await getMeals()) as mealsProps["meals"];
   return (
     <>
       <header className={classes.header}>
@@ -23,7 +28,11 @@ async function MealsPage() {
         </p>
       </header>
       <main className={classes.main}>
-        <MealsGrid meals={meals} />
+        <Suspense
+          fallback={<p className={classes.loading}>Fetching meals...</p>}
+        >
+          <Meals />
+        </Suspense>
       </main>
     </>
   );
