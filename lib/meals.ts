@@ -10,5 +10,6 @@ export async function getMeals() {
   });
   const meals = db.prepare(`SELECT * FROM meals`).all(); // .run() 是如果要插入數據或更改數據
 
+  // throw new Error("Something went wrong");
   return meals;
 }
