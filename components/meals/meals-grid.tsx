@@ -1,7 +1,7 @@
 import MealItem from "./meal-item";
 import classes from "./meals-grid.module.css";
 
-interface mealsProps {
+export interface mealsProps {
   meals: {
     id: string;
     title: string;
