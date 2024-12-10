@@ -54,11 +54,7 @@ function ImagePicker({ label, name }: ImagePickerProps) {
           onChange={handleImageChange}
           required
         />
-        <button
-          className={classes.button}
-          type="button"
-          onClick={handleClick}
-        >
+        <button className={classes.button} type="button" onClick={handleClick}>
           Pick an Image
         </button>
       </div>
