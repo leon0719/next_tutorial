@@ -3,8 +3,8 @@ import { Roboto } from "next/font/google";
 import MainHeader from "@/components/main-header/main-header";
 
 export const metadata = {
-  title: "NextLevel Food",
-  description: "Delicious meals, shared by a food-loving community.",
+  title: "All Meals",
+  description: "Browse the delicious meals shared by our vibrant community.",
 };
 
 const roboto = Roboto({

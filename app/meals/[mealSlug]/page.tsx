@@ -4,6 +4,23 @@ import React from "react";
 import { getMeal, Meal } from "@/lib/meals";
 import { notFound } from "next/navigation"; // 自動導向not found page
 
+interface generateMetadataProps {
+  params: {
+    mealSlug: number;
+  };
+}
+
+export async function generateMetadata({ params }: generateMetadataProps) {
+  const meal = await getMeal(params.mealSlug);
+  if (!meal) {
+    notFound();
+  }
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
+
 interface MealProps {
   params: {
     mealSlug: number;
